@@ -1,0 +1,372 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary: #3498db;
+  --secondary: #f1c40f;
+  --accent: #2ecc71;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Nuevas variables responsivas */
+  --container-padding: 1rem;
+  --container-padding-sm: 0.75rem;
+  --header-height: 4rem;
+  --section-spacing: clamp(2rem, 5vw, 6rem);
+  --element-spacing: clamp(1rem, 3vw, 2rem);
+  --border-radius: 0.5rem;
+  --font-size-base: clamp(0.875rem, 1vw + 0.5rem, 1rem);
+  --font-size-lg: clamp(1rem, 1.5vw + 0.5rem, 1.25rem);
+  --font-size-xl: clamp(1.25rem, 2vw + 0.5rem, 1.5rem);
+  --font-size-2xl: clamp(1.5rem, 2.5vw + 0.75rem, 2rem);
+  --font-size-3xl: clamp(1.75rem, 3vw + 1rem, 2.5rem);
+
+  /* Nuevas variables para evitar cortes en texto */
+  --text-padding-bottom: 0.25rem;
+  --text-line-height: 1.5;
+  --descender-safe-space: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-size: var(--font-size-base);
+  width: 100%;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Estilos para scroll suave */
+html {
+  scroll-behavior: smooth;
+  font-size: 16px; /* Base font size */
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Estilos para enlaces */
+a {
+  transition: all 0.3s ease;
+}
+
+/* Animación de código para el fondo */
+@keyframes slide {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 1000px 1000px;
+  }
+}
+
+/* Estilos para scroll personalizado */
+::-webkit-scrollbar {
+  width: clamp(5px, 1vw, 10px);
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary);
+}
+
+/* Contenedores responsivos */
+.container-fluid {
+  width: 100%;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container-responsive {
+  width: 100%;
+  max-width: 1200px;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Estilos específicos para scroll horizontal táctil */
+.touch-pan-x {
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  -ms-overflow-style: none;  /* IE y Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.touch-pan-x::-webkit-scrollbar {
+  display: none; /* Ocultar scrollbar pero mantener funcionalidad */
+}
+
+.snap-x {
+  scroll-snap-type: x mandatory;
+}
+
+.snap-center {
+  scroll-snap-align: center;
+}
+
+.snap-mandatory {
+  scroll-snap-stop: always;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mejoras adicionales para la sección de beneficios en móvil */
+.benefit-container {
+  scroll-snap-type: x mandatory;
+}
+
+.benefit-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.benefit-mobile-indicator {
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.benefit-mobile-indicator:hover {
+  transform: scale(1.2);
+}
+
+/* Estilos para estadísticas */
+.stat-bar-fill {
+  transition: width 1.5s ease-out;
+}
+
+.company-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 100%;
+  padding-bottom: var(--descender-safe-space);
+  line-height: var(--text-line-height);
+}
+
+.company-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.benefit-stats {
+  animation: countUp 1s forwards;
+}
+
+/* Estilos para la pantalla de carga */
+.loading-screen {
+  transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  margin-left: 2px;
+}
+
+@keyframes terminal-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.terminal-cursor {
+  animation: terminal-blink 1s step-end infinite;
+}
+
+.loading-progress {
+  transition: width 0.3s ease-out;
+}
+
+/* Clases de utilidad responsivas adicionales */
+.text-responsive {
+  font-size: var(--font-size-base);
+}
+
+.heading-responsive {
+  font-size: var(--font-size-2xl);
+}
+
+.title-responsive {
+  font-size: var(--font-size-3xl);
+}
+
+.img-responsive {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
+/* Nueva clase para evitar corte de texto en letras con descendentes */
+.text-descender-safe {
+  padding-bottom: var(--descender-safe-space);
+  line-height: var(--text-line-height);
+  overflow: visible;
+}
+
+/* Agregar espacio adecuado para contenedores de tarjetas */
+/* .company-card { */
+/*   transition: transform 0.3s ease, box-shadow 0.3s ease; */
+/*   max-width: 100%; */
+/*   padding-bottom: var(--descender-safe-space); */
+/*   line-height: var(--text-line-height); */
+/* } */
+
+.company-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Asegurar que contenedores de texto tengan suficiente espacio */
+p, h1, h2, h3, h4, h5, h6, span, button, a {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Ajuste específico para elementos con nombres de empresas */
+.company-name, .brand-text {
+  padding-bottom: 0.35rem;
+  line-height: 1.6;
+  overflow: visible;
+  display: inline-block;
+}
+
+/* Mejorar visualización en tarjetas de empresas */
+.card-content {
+  padding-bottom: 0.5rem;
+}
+
+/* Asegurar que los iconos y textos estén alineados correctamente */
+.icon-text-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Mejoras de responsividad para diferentes dispositivos */
+@media (max-width: 991px) {
+  :root {
+    --container-padding: 0.75rem;
+  }
+
+  .container-responsive {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --container-padding: 0.75rem;
+    --section-spacing: 2.5rem;
+    --element-spacing: 1rem;
+  }
+
+  body.is-loading {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .heading-responsive {
+    font-size: var(--font-size-xl);
+  }
+
+  .title-responsive {
+    font-size: var(--font-size-2xl);
+  }
+
+  /* Ajustar espaciado en secciones para móviles */
+  section {
+    padding-top: var(--section-spacing);
+    padding-bottom: var(--section-spacing);
+  }
+
+  /* Mejorar grid layouts en móviles */
+  .grid {
+    grid-gap: var(--element-spacing);
+  }
+}
+
+/* Mejorar la responsividad en pantallas muy pequeñas */
+@media (max-width: 480px) {
+  :root {
+    --container-padding: 0.625rem;
+    --section-spacing: 2rem;
+    --element-spacing: 0.75rem;
+  }
+
+  html {
+    font-size: 14px; /* Reducir ligeramente el tamaño base de fuente */
+  }
+
+  .heading-responsive {
+    font-size: var(--font-size-lg);
+  }
+
+  .title-responsive {
+    font-size: var(--font-size-xl);
+  }
+
+  /* Ajustar márgenes y paddings para dispositivos muy pequeños */
+  .container-responsive {
+    padding-left: var(--container-padding-sm);
+    padding-right: var(--container-padding-sm);
+  }
+}
+
+/* Ajustes específicos para pantallas muy pequeñas */
+@media (max-width: 320px) {
+  :root {
+    --container-padding-sm: 0.5rem;
+  }
+
+  html {
+    font-size: 13px;
+  }
+}
