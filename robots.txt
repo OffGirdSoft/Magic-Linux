@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Allow: /
+
+# Optimizado para mejor indexación
+Disallow: /api/
+Disallow: /_next/
+
+# Host
+Host: https://magiclinux.com
+
+# Sitemap
+Sitemap: https://offgirdsoft.github.io/Magic-Linux/sitemap.xml
